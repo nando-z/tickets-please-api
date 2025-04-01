@@ -12,25 +12,40 @@ class AuthController extends Controller
 {
     use \App\Traits\ApiResponses;
 
+    /**
+     * Handle user registration.
+     *
+     * @param RegisterRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(RegisterRequest $request)
     {
-        $user = User::create(
-            $request->only('name', 'email', 'password') + [
-                'email_verified_at' => now(),
-                'remember_token' => $request->get('remember_token'),
-            ]
-        );
+        // Create a new user
+        $user = User::create($request->only('name', 'email', 'password'));
 
-        $token = $user->createToken('API TOKEN FOR ' . $user->email)->plainTextToken;
+        // Generate a token for the user (1-month expiration)
+        $token = $user->createToken(
+            'API TOKEN FOR ' . $user->email,
+            ['*'],
+            now()->addMonth()
+        )->plainTextToken;
 
+        // Return success response
         return $this->success('User created successfully', [
             'user' => $user,
             'token' => $token,
         ]);
     }
 
+    /**
+     * Handle user login.
+     *
+     * @param LoginRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(LoginRequest $request)
     {
+        // Attempt to authenticate the user
         if (!Auth::attempt($request->only('email', 'password'))) {
             return $this->error('Invalid credentials', [
                 'email' => ['The provided credentials are incorrect.'],
@@ -38,19 +53,35 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $user = Auth::user();
-        $token = $user->createToken('API TOKEN FOR ' . $user->email)->plainTextToken;
+        // Retrieve the authenticated user
+        $user = User::where('email', $request->email)->first();
 
+        // Generate an API token (1-month expiration)
+        $token = $user->createToken(
+            'API TOKEN FOR ' . $user->email,
+            ['*'],
+            now()->addMonth()
+        )->plainTextToken;
+
+        // Return success response
         return $this->ok([
             'user' => $user,
             'token' => $token,
-        ], 'Login authenticated. Welcome back, ' . $user->name);
+        ], 'Login successful. Welcome back, ' . $user->name . '!');
     }
 
+    /**
+     * Handle user logout.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout(Request $request)
     {
+        // Revoke all access tokens for the user
         $request->user()->currentAccessToken()->delete();
 
-        return $this->ok('Logged out successfully');
+        // Return success response
+        return $this->ok('Logged out successfully.');
     }
 }
