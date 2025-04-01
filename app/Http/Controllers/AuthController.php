@@ -11,7 +11,32 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    // Register a new user
+    public function register(RegisterRequest $request)
+    {
+        $user = User::create(
+            $request->only('name', 'email', 'password') + [
+                'email_verified_at' => now(),
+                'remember_token' => $request->get('remember_token'),
+            ]
+        );
 
+        // Create a token for the user after creation
+        $token = $user->createToken('API TOKEN FOR ' . $user->email)->plainTextToken;
+
+        return response()->json(
+            [
+                'message' => 'User created successfully',
+                'user' => $user,
+                'status' => 201,
+                'token' => $token,
+            ],
+            201
+        );
+    }
+
+
+    // Login a user
     public function login(LoginRequest $request)
     {
         // Validate the request
@@ -40,29 +65,9 @@ class AuthController extends Controller
             [
                 'user' => $user,
                 'message' => 'Authenticated',
-                'token' => $user->createToken('api_token' . $user->email)->plainTextToken,
+                'token' => $user->createToken('API TOKEN FOR ' . $user->email)->plainTextToken,
             ],
             200
-        );
-    }
-
-    public function register(RegisterRequest $request)
-    {
-        $user = User::create(
-            $request->only('name', 'email', 'password') + [
-                'email_verified_at' => now(),
-                'remember_token' => $request->get('remember_token'),
-            ]
-        );
-
-        return response()->json(
-            [
-                'message' => 'User created successfully',
-                'user' => $user,
-                'status' => 201,
-                'token' => $user->createToken('api_token' . $user->email)->plainTextToken,
-            ],
-            201
         );
     }
 }
