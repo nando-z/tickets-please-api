@@ -8,9 +8,11 @@ use App\Http\Requests\ApiRegisterRequest as RegisterRequest;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    use \App\Traits\ApiResponses;
     // Register a new user
     public function register(RegisterRequest $request)
     {
@@ -24,14 +26,13 @@ class AuthController extends Controller
         // Create a token for the user after creation
         $token = $user->createToken('API TOKEN FOR ' . $user->email)->plainTextToken;
 
-        return response()->json(
+        return $this->success(
+            'User created successfully',
             [
-                'message' => 'User created successfully',
                 'user' => $user,
-                'status' => 201,
                 'token' => $token,
             ],
-            201
+
         );
     }
 
@@ -45,14 +46,12 @@ class AuthController extends Controller
         );
         // and return it in the response
         if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(
+
+            return $this->error(
+                'Invalid credentials',
                 [
-                    'message' => 'Invalid credentials',
-                    'errors' => [
-                        'password' => ['The provided credentials are incorrect.'],
-                        'email' => ['The provided credentials are incorrect.'],
-                    ],
-                    'status' => 401,
+                    'password' => ['The provided credentials are incorrect.'],
+                    'email' => ['The provided credentials are incorrect.'],
                 ],
                 401
             );
@@ -61,13 +60,22 @@ class AuthController extends Controller
         // and return it in the response
         $user = User::firstWhere('email', $request->get('email'));
 
-        return response()->json(
+
+
+        return $this->ok(
+            'Authenticated',
             [
                 'user' => $user,
-                'message' => 'Authenticated',
                 'token' => $user->createToken('API TOKEN FOR ' . $user->email)->plainTextToken,
-            ],
-            200
+            ]
         );
+    }
+
+    public function logout(Request $request)
+    {
+        // Revoke the token that was used to authenticate the request
+        $request->user()->currentAccessToken()->delete();
+
+        return $this->ok('Logged out successfully');
     }
 }
