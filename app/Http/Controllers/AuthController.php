@@ -25,7 +25,7 @@ class AuthController extends Controller
 
         // Generate a token for the user (1-month expiration)
         $token = $user->createToken(
-            'API TOKEN FOR ' . $user->email,
+            "API TOKEN FOR {$user->email}",
             ['*'],
             now()->addMonth()
         )->plainTextToken;
@@ -56,18 +56,10 @@ class AuthController extends Controller
         // Retrieve the authenticated user
         $user = User::where('email', $request->email)->first();
 
-        // Generate an API token (1-month expiration)
-        $token = $user->createToken(
-            'API TOKEN FOR ' . $user->email,
-            ['*'],
-            now()->addMonth()
-        )->plainTextToken;
-
-        // Return success response
+        // Return success response without generating a token
         return $this->ok([
             'user' => $user,
-            'token' => $token,
-        ], 'Login successful. Welcome back, ' . $user->name . '!');
+        ], "Login successful. Welcome back, {$user->name}!");
     }
 
     /**
