@@ -57,9 +57,7 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         // Return success response without generating a token
-        return $this->ok([
-            'user' => $user,
-        ], "Login successful. Welcome back, {$user->name}!");
+        return $this->ok("Login successful...");
     }
 
     /**
