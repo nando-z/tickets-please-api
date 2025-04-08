@@ -3,14 +3,22 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-	return response()->json([
-		"message" => "Api Runing Will",
-		"status" => 200,
-		"routs" => [
-			"/api/login" => "http://127.0.0.1:8000/api/login",
-			"/api/register" => "http://127.0.0.1:8000/api/v1/register",
-			"api/v1/tickets" => "http://127.0.0.1:8000/api/v1/tickets",
-
-		]
-	]);
+    return [
+        "Application" => "Laravel",
+        "Version" => app()->version(),
+        "Environment" => app()->environment(),
+        "Routes" => [
+            "GET /" => "Home",
+            "GET /api" => "API Home",
+            "GET /api/users" => "User List",
+            "POST /api/users" => "Create User",
+            "GET /api/users/{id}" => "User Details",
+            "PUT /api/users/{id}" => "Update User",
+            "DELETE /api/users/{id}" => "Delete User",
+        ],
+        "Documentation" => [
+            "API Documentation" => url('/api/docs'),
+            "Laravel Documentation" => url('https://laravel.com/docs'),
+        ],
+    ];
 });
