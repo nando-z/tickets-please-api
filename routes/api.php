@@ -1,15 +1,21 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
 
-Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
+// Authenticated routes
+Route::middleware('auth:sanctum')->group(function () {
 
-Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])
-    ->middleware('auth:sanctum');
+    Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+});
+
+// Public routes
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/register', [AuthController::class, 'register']);

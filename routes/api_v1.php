@@ -1,7 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\TicketController;
 
-Route::apiResource('tickets', TicketController::class)
-    ->middleware('auth:sanctum');
+use App\Http\Controllers\Api\V1\UserController;
+
+use Illuminate\Support\Facades\Route;
+
+// Authenticated routes
+Route::middleware('auth:sanctum')->group(function () {
+  Route::apiResource('tickets', TicketController::class);
+  Route::apiResource('user', UserController::class);
+});
