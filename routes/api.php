@@ -4,7 +4,6 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
 // Authenticated routes
 Route::middleware('auth:sanctum')->group(function () {
 

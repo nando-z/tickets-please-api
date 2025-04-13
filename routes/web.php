@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return [
-        "Application" => "Laravel",
+        "Application" => "Laravel Api",
         "Version" => app()->version(),
         "Environment" => app()->environment(),
         "Routes" => [
