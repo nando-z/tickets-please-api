@@ -47,6 +47,11 @@ class TicketController extends ApiController
     {
         // This method is used to show a single ticket resource.
         // It retrieves the ticket from the database using the provided ID
+
+        if ($this->include('author')) {
+
+            return new TicketResource($ticket->load('user'));
+        }
         return new TicketResource($ticket);
     }
 
