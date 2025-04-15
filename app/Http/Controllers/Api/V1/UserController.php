@@ -15,10 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
+
         return UserResource::collection(User::paginate());
     }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -36,13 +35,6 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
