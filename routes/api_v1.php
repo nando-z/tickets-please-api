@@ -7,5 +7,5 @@ use Illuminate\Support\Facades\Route;
 // Authenticated routes
 Route::middleware('auth:sanctum')->group(function () {
   Route::apiResource('tickets', TicketController::class);
-  Route::apiResource('user', UserController::class);
+  Route::apiResource('users', UserController::class);
 });

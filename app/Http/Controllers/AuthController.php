@@ -54,10 +54,13 @@ class AuthController extends Controller
         }
 
         // Retrieve the authenticated user
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email , 'token' , $request->token)->first();
 
         // Return success response without generating a token
-        return $this->ok("Login successful...");
+        return $this->ok("Login successful...",
+        [
+            "token"=>$user->token_get_all()
+        ]);
     }
 
     /**
