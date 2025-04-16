@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api\V1;
-use App\Http\Requests\StoreUserRequest;
+// use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\V1\UserResource;
 use App\Models\User;
@@ -22,23 +22,16 @@ class UserController extends ApiController
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreUserRequest $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(User $user)
     {
+        # if request include => tickets..
         if ($this->include("tickets")) {
-            # code...
-
+            # Show include Tickets..
             return new UserResource($user->load("tickets"));
         }
+        # else don't show tickets...
         return new UserResource($user);
     }
 
