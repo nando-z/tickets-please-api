@@ -29,6 +29,7 @@ class UserResource extends JsonResource
                     ]
                 ),
             ],
+         'includes' => TicketResource::collection($this->whenLoaded('tickets')),
         ];
     }
 }

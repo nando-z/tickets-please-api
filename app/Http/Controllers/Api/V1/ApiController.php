@@ -6,18 +6,18 @@ use App\Http\Controllers\Controller;
 
 class ApiController extends Controller
 {
- public function include(string $relationship)
- {
+ public function include(string $relationship) : bool
+{
     $param =  request()->get('include');
 
     if (!isset($param))
     {
         return false;
     }
-    // Splitting Values
 
-    $includeValue = explode(',' , strtolower($param));
+    $includeValues = explode(',' , strtolower($param));
 
-    return is_array(strtolower($relationship), $includeValue);
- }
+    return is_array(strtolower($relationship) , $includeValues );
+
+    }
 }
