@@ -5,14 +5,11 @@
 </p>
 
 <p align="center">
-  <strong>🎟️ Tickets Please API</strong><br>
+  <h1>Tickets Please API</h1><br>
   A Laravel-powered backend for managing event tickets with ease.
 </p>
 
 <p align="center">
-  <a href="https://github.com/nando-z/tickets-please-api/actions/workflows/tests.yml">
-    <img src="https://github.com/nando-z/tickets-please-api/actions/workflows/tests.yml/badge.svg" alt="Build Status">
-  </a>
   <a href="https://packagist.org/packages/nando-z/tickets-please-api">
     <img src="https://img.shields.io/packagist/v/nando-z/tickets-please-api.svg" alt="Latest Stable Version">
   </a>
