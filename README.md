@@ -1,66 +1,99 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="https://github.com/nando-z/tickets-please-api">
+    <img src="https://laravel.com/img/logomark.min.svg" alt="Laravel Logo" width="100">
+  </a>
 </p>
 
-## About Laravel
+<p align="center">
+  <strong>🎟️ Tickets Please API</strong><br>
+  A Laravel-powered backend for managing event tickets with ease.
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  <a href="https://github.com/nando-z/tickets-please-api/actions/workflows/tests.yml">
+    <img src="https://github.com/nando-z/tickets-please-api/actions/workflows/tests.yml/badge.svg" alt="Build Status">
+  </a>
+  <a href="https://packagist.org/packages/nando-z/tickets-please-api">
+    <img src="https://img.shields.io/packagist/v/nando-z/tickets-please-api.svg" alt="Latest Stable Version">
+  </a>
+  <a href="https://packagist.org/packages/nando-z/tickets-please-api">
+    <img src="https://img.shields.io/packagist/dt/nando-z/tickets-please-api.svg" alt="Total Downloads">
+  </a>
+  <a href="https://github.com/nando-z/tickets-please-api/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/nando-z/tickets-please-api.svg" alt="License">
+  </a>
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<hr>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<h2>🚀 Features</h2>
+<ul>
+  <li>🎫 <strong>Event & Ticket Management</strong>: Create, update, and delete events and their associated tickets.</li>
+  <li>👥 <strong>User Authentication</strong>: Secure user registration and login functionalities.</li>
+  <li>📊 <strong>Analytics</strong>: Track ticket sales and event popularity.</li>
+  <li>🛠️ <strong>RESTful API</strong>: Clean and organized endpoints following REST principles.</li>
+  <li>🧪 <strong>Testing Suite</strong>: Comprehensive tests to ensure reliability.</li>
+</ul>
 
-## Learning Laravel
+<hr>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<h2>🛠️ Installation</h2>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<ol>
+  <li><strong>Clone the repository:</strong><br>
+    <code>git clone https://github.com/nando-z/tickets-please-api.git && cd tickets-please-api</code>
+  </li>
+  <li><strong>Install dependencies:</strong><br>
+    <code>composer install</code><br>
+    <code>npm install && npm run dev</code>
+  </li>
+  <li><strong>Environment setup:</strong><br>
+    <code>cp .env.example .env</code><br>
+    <code>php artisan key:generate</code>
+  </li>
+  <li><strong>Database migration:</strong><br>
+    <code>php artisan migrate</code>
+  </li>
+  <li><strong>Run the server:</strong><br>
+    <code>php artisan serve</code>
+  </li>
+</ol>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<hr>
 
-## Laravel Sponsors
+<h2>📬 API Endpoints</h2>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Endpoint</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>GET</td><td>/api/events</td><td>List all events</td></tr>
+    <tr><td>POST</td><td>/api/events</td><td>Create a new event</td></tr>
+    <tr><td>GET</td><td>/api/events/{id}</td><td>Retrieve event details</td></tr>
+    <tr><td>PUT</td><td>/api/events/{id}</td><td>Update event information</td></tr>
+    <tr><td>DELETE</td><td>/api/events/{id}</td><td>Delete an event</td></tr>
+  </tbody>
+</table>
 
-### Premium Partners
+<p><em>For full documentation, check the <code>docs/API.md</code> (coming soon 👀).</em></p>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+<hr>
 
-## Contributing
+<h2>🧪 Running Tests</h2>
+<p>Make sure everything works as expected:</p>
+<code>php artisan test</code>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<hr>
 
-## Code of Conduct
+<h2>🤝 Contributing</h2>
+<p>Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.</p>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<hr>
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<h2>📄 License</h2>
+<p>This project is licensed under the <a href="LICENSE">MIT License</a>.</p>
