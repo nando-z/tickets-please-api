@@ -16,7 +16,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
+          php-version: '8.3'
           extensions: mbstring, bcmath, sqlite3
           coverage: none
 
@@ -24,18 +24,12 @@ jobs:
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
       - name: Install Composer Dependencies
-        run: composer install --no-progress --prefer-dist --optimize-autoloader
-
+        run: composer install
       - name: Generate Application Key
         run: php artisan key:generate
 
       - name: Set Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
-
-      - name: Setup SQLite Database
-        run: |
-          mkdir -p database
-          touch database/database.sqlite
 
       - name: Run Tests
         env:
